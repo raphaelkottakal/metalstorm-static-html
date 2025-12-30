@@ -17,11 +17,32 @@ renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
 camera.position.z = 5;
+
+const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+scene.add(ambientLight);
+
+const keyLight = new THREE.DirectionalLight(0xffffff);
+keyLight.position.set(-2, 1, 2);
+keyLight.intensity = 4;
+scene.add(keyLight);
+// const keyLightHelper = new THREE.DirectionalLightHelper(keyLight, 1, 0x00ff00);
+// scene.add(keyLightHelper);
+
+const fillLight = new THREE.DirectionalLight(0xffffff);
+fillLight.position.set(1, 1, 2);
+fillLight.intensity = 1;
+scene.add(fillLight);
+// const fillLightHelper = new THREE.DirectionalLightHelper(
+//   fillLight,
+//   1,
+//   0x0000ff
+// );
+// scene.add(fillLightHelper);
 
 function animate() {
   cube.rotation.x += 0.01;
